@@ -1,0 +1,44 @@
+<%-- any content can be specified here e.g.: --%>
+
+<%@page import="com.mycompany.usuariostomcat.domain.Login"%>
+<%@ page pageEncoding="UTF-8" %>
+
+<%   HttpSession mySession = request.getSession(false);      
+     Login login =(Login) mySession.getAttribute("login");
+     boolean isAdmin = login.isPower();
+%>
+                
+<header>
+    <div>
+        <h1>Flota de Vehiculos</h1>
+    </div>
+</header>
+
+<nav>
+    <div class="divNav">
+        
+        <% if(isAdmin){%>
+            <div>
+                <a href="insertarEmpleado.jsp">Nuevo Empleado</a>
+            </div>
+        <%}%>
+        <div>
+            <a href="http://localhost:8080/UsuariosTomcat/ListaEmpleados">Empleados</a>
+        </div>
+        <div>
+            <a href="http://localhost:8080/UsuariosTomcat/ListaUbicaciones">Ubicaciones</a>
+        </div>
+        <% if(isAdmin){%>
+       <div>
+            <a href="insertarUbicacion.jsp">Nueva Ubicacion</a>
+        </div>
+       
+       <%}%>
+       
+        <div>
+            <p>Hola <%=login.getUsuario().getNombre()%></p>
+            <a href="http://localhost:8080/tomcatproject/logOut">Logout</a>
+        </div>
+     </div>
+    
+</nav>
