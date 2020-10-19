@@ -108,7 +108,97 @@ public class DaoUbicacion {
    
         return ubicacion;
     }
+    
+    public Ubicacion getUbicacion(String nombreUbicacion) {
+        
+        Ubicacion ubicacion = null;
+        Statement statement;
+        try {
+            statement = conexion.createStatement();
+            String sql = "SELECT * FROM ubicacion WHERE nombre='" + nombreUbicacion + "';";;
+            ResultSet resultSet = statement.executeQuery(sql);
+  
+            
+            if(resultSet.next()){
+                int id= resultSet.getInt("id");
+                String nombre =resultSet.getString("nombre");               
+                ubicacion = new Ubicacion(id,nombre);
+                
+            }
+            statement.close();
+        } catch (SQLException throwables) {
+        }
+        
 
+   
+        return ubicacion;
+    }
+
+    
+    public void insertarUbicacion(Ubicacion ubicacion) {
+        Statement statement;
+        try {
+            statement = conexion.createStatement();
+            
+            String sql ="INSERT INTO ubicacion(id,nombre)VALUES('"+ubicacion.getId()+"','"+ubicacion.getNombre()+"');";
+            statement.executeUpdate(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            System.out.println("Conexion cerrada");
+        }
+    }
+     
+     
+     public void modificarUbicacion(Ubicacion ubicacion)  {
+        Statement s;
+        try {
+            s = this.conexion.createStatement();           
+            String sql = "UPDATE ubicacion SET "
+                    + "id= '" + ubicacion.getId()+"', "
+                    + "nombre='"+ubicacion.getNombre() + "', " +
+                    "WHERE id=" + ubicacion.getId() + ";";
+                
+            s.executeUpdate(sql);
+                  
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            System.out.println("Conexion cerrada");
+        }
+    }
+
+    public String eliminarUbicacion(int id) {
+        Statement s;
+        try {
+            s = this.conexion.createStatement();
+            String sql = "DELETE FROM ubicacion WHERE id=" + id + ";";
+            int rowModified = s.executeUpdate(sql);
+
+            if(rowModified==1){
+
+                return "Se ha eliminado correctamente el registro de la bbdd";
+
+            }else{
+
+                return "No se ha eliminado el registro de la bbdd";
+
+            }
+
+        } catch (SQLException throwables) {
+            
+            throwables.printStackTrace();
+           
+        } finally {
+            
+            System.out.println("Conexion cerrada");
+        }
+
+        return "Error";
+
+    }
+
+    
 }
 
 

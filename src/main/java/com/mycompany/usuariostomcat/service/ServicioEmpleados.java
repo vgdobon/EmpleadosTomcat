@@ -26,4 +26,17 @@ public class ServicioEmpleados {
     public Empleado getEmpleado(int id) {
         return dao.getEmpleado(id);
     }
+
+    public void eliminarEmpleado(int id){
+        
+        dao.eliminarEmpleado(id);
+    }
+    
+    public void insertarVehiculo(Empleado empleado){
+        dao.insertarEmpleado(empleado);
+    }
+    
+    public void modificarEmpleado(Empleado empleado){
+        dao.modificarEmpleado(empleado);
+    }
 }

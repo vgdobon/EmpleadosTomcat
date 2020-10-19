@@ -7,6 +7,7 @@ package com.mycompany.usuariostomcat.service;
 
 import com.mycompany.usuariostomcat.domain.Ubicacion;
 import com.mycompany.usuariostomcat.dao.DaoUbicacion;
+import com.mycompany.usuariostomcat.domain.Empleado;
 import java.util.List;
 
 /**
@@ -22,6 +23,23 @@ public class ServicioUbicacion {
     
     public Ubicacion getUbicacion(int id){
         return dao.getUbicacion(id);
+    }
+    
+    public Ubicacion getUbicacion(String nombre){
+        return dao.getUbicacion(nombre);
+    }
+    
+    public void eliminarUbicacion(int id){
+        
+        dao.eliminarUbicacion(id);
+    }
+    
+    public void insertarUbicacion(Ubicacion ubicacion){
+        dao.insertarUbicacion(ubicacion);
+    }
+    
+    public void modificarUbicacion(Ubicacion ubicacion){
+        dao.modificarUbicacion(ubicacion);
     }
     
 }

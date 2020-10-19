@@ -5,12 +5,17 @@
  */
 package com.mycompany.usuariostomcat.controller;
 
+import com.mycompany.usuariostomcat.domain.Empleado;
+import com.mycompany.usuariostomcat.service.ServicioEmpleados;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,7 +36,15 @@ public class EliminaEmpleado extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        
+        int idEliminar =  Integer.parseInt(request.getParameter("id"));
+        ServicioEmpleados servicioE = new ServicioEmpleados();
+        servicioE.eliminarEmpleado(idEliminar);
+        List<Empleado> empleados = servicioE.getListaEmpleados();
+     HttpSession mySession = request.getSession(true);
+     mySession.setAttribute("l"
+             + "istaEmpleados", empleados);
+     RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ListaEliminarVehiculo.jsp");
+     rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
